@@ -1,3 +1,5 @@
+package com.dataductus;
+
 public class PrintTree {
 
     /**
@@ -17,15 +19,24 @@ public class PrintTree {
         // means a new line and re-evaluating tab spacing
         int indent = -1;
         boolean afterIndent = true;
-        boolean afterOpen = false; // Corner case 1: empty list []
+
+        // Corner case 1: empty list []
+        boolean afterOpen = false;
+        // Corner case 2: no comma after ]. Anything except comma
+        // after close bracket is invalid
+        boolean afterClose = false; 
         for (char c : input.toCharArray()) {
             switch (c) {
                 case '[':
+                    if (afterClose) {
+                        throw new Exception();
+                    }
                     indent++;
                     afterOpen = true;
                     break;
                 case ']':
                     indent--;
+                    afterClose = true;
                     // Corner case 1: empty list
                     if (afterOpen) {
                         sb.append(getTabs(indent));
@@ -34,13 +45,22 @@ public class PrintTree {
                     break;
                 case ',':
                     afterOpen = false;
+                    afterClose = false;
                     continue;
                 case ' ':
+                    // Corner case 2
+                    if (afterClose) {
+                        throw new Exception();
+                    }
                     sb.append("\n");
                     afterIndent = true; // need indents after new line
                     afterOpen = false;
                     break;
                 default:
+                    // Corner case 2
+                    if (afterClose) {
+                        throw new Exception();
+                    }
                     // Only insert indents after new lines
                     if (afterIndent) {
                         sb.append(getTabs(indent));

@@ -37,6 +37,10 @@ PROMPT:
 ## Complexity && Efficiency
 This algorithm runs in `O(n * l)` time complexity, where `n` represents the total number of elements in the input string and `l` represents the deepest level of any element in the tree. The for-loop in `printTree()` iterates through every character in the string and an inner for-loop loops and adds spaces for each level an element is in. In the worst case scenario, every element in the string is on the deepest level, putting the growth rate at `n * l`.
 
+The space complexity is `O(n * l)`. We store each element we need to print in a buffer followed by spaces for each level the element is in. In the worst case scenario, every element is on the deepest level.
+
+Remember that when calculating growth complexity you drop constants and non-dominant terms.
+
 ## Setup
 This is implemented in Java. For the full problem prompt, see the Prompt section below. In order to run this code, you will need minimum Java 7 installed.
 
@@ -178,6 +182,13 @@ OUTPUT:
 
 A
 B
+
+######## CASE 12 ######## 
+INPUT:
+[][[[]][]][]
+
+OUTPUT:
+Invalid!
 
 ```
 
