@@ -49,7 +49,7 @@ public class PrintTree {
                     sb.append(c); // Append char + newline
                     afterOpen = false;
                     break;
-           }
+            }
         }
 
         // If indent is not back to -1 then something was invalid.
