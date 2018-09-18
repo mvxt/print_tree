@@ -168,5 +168,16 @@ B
   2
     Herp
     Derp
+
+######## CASE 11 ########
+INPUT:
+[[], [], A, B]
+
+OUTPUT:
+  
+
+A
+B
+
 ```
 

@@ -17,29 +17,37 @@ public class PrintTree {
         // means a new line and re-evaluating tab spacing
         int indent = -1;
         boolean afterIndent = true;
+        boolean afterOpen = false; // Corner case 1: empty list []
         for (char c : input.toCharArray()) {
             switch (c) {
                 case '[':
                     indent++;
+                    afterOpen = true;
                     break;
                 case ']':
                     indent--;
+                    // Corner case 1: empty list
+                    if (afterOpen) {
+                        sb.append(getTabs(indent));
+                        afterOpen = false;
+                    }
                     break;
                 case ',':
+                    afterOpen = false;
                     continue;
                 case ' ':
-                    sb.appent("\n"); // insert newline
+                    sb.append("\n");
                     afterIndent = true; // need indents after new line
+                    afterOpen = false;
                     break;
                 default:
                     // Only insert indents after new lines
                     if (afterIndent) {
-                        for (int i = 0; i < indent; i++) {
-                            sb.append("  "); // 2-space indents
-                        }
+                        sb.append(getTabs(indent));
                         afterIndent = false;
                     }
-                    sb.append(c); // Append actual char
+                    sb.append(c); // Append char + newline
+                    afterOpen = false;
                     break;
            }
         }
@@ -49,6 +57,19 @@ public class PrintTree {
             throw new Exception("error: mismatched brackets!");
         }
 
+        return sb.toString();
+    }
+
+    /**
+     * Helper function to return spaces based on indent level given.
+     *
+     * @param indent
+     */
+    private String getTabs(int indent) {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < indent; i++) {
+            sb.append("  "); // 2-space indents
+        }
         return sb.toString();
     }
 
