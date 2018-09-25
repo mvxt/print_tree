@@ -40,9 +40,9 @@ public class PrintTree {
                     indent--;
                     afterClose = true;
                     // corner case 1: empty list
-                    if (afteropen) {
-                        sb.append(gettabs(indent));
-                        afteropen = false;
+                    if (afterOpen) {
+                        sb.append(getTabs(indent));
+                        afterOpen = false;
                     }
                     break;
                 case ',':
@@ -97,19 +97,33 @@ public class PrintTree {
 
     public static void main(String[] args) {
         
-        // Just accept one string input at a time
-        if (args.length != 1) {
-            System.out.println("  usage: java PrintTree STRING");
-            return;
-        }
-
         final PrintTree pt = new PrintTree();
 
-        // Catches exceptions and prints "Invalid!"
-        try {
-            System.out.println(pt.printTree(args[0]));
-        } catch (Exception e) {
-            System.out.println("Invalid!");
+        String[] tests = {
+            "[1, 2, [A, B, C, [5^&, )()6, , 7], D, E], 3, 4]",
+            "[1, 2, 3, [A], 4]",
+            "[1, 2, 3",
+            "[A, B, 2, C{123, D]",
+            "[A, B, [1, 2, [Herp, derp]]",
+            "[[, ], [A, B]]",
+            "[[1, 3], [A, B]]",
+            "[[[[A]]]]",
+            "[A, B, C, [[[1], 2], 3]]",
+            "[A, B, [1, 2, [Herp, derp]]]",
+            "[[], [], A, B]",
+            "[][[[]][]][]",
+            "&[A, B, C]",
+            "[A, B, C]&"
+        };
+
+        for (int i = 0; i < tests.length; i++) {
+            // Catches exceptions and prints "Invalid!"
+            try {
+                System.out.printf("######## CASE %d ########\n", i + 1);
+                System.out.println(pt.printTree(tests[i]));
+            } catch (Exception e) {
+                System.out.println("Invalid!");
+            }
         }
     }
 }
