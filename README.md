@@ -33,6 +33,8 @@ PROMPT:
 
 ## Assumptions
 - The input string will always be enclosed in brackets.
+- Empty lists are assumed to contain one empty element.
+- Empty branches and deeply-indented leaves are valid.
 
 ## Complexity && Efficiency
 This algorithm runs in `O(n * l)` time complexity, where `n` represents the total number of elements in the input string and `l` represents the deepest level of any element in the tree. The for-loop in `printTree()` iterates through every character in the string and an inner for-loop loops and adds spaces for each level an element is in. In the worst case scenario, every element in the string is on the deepest level, putting the growth rate at `n * l`.
