@@ -190,5 +190,19 @@ INPUT:
 OUTPUT:
 Invalid!
 
+######## CASE 13 ######## 
+INPUT:
+&[A, B, C]
+
+OUTPUT:
+Invalid!
+
+######## CASE 14 ######## 
+INPUT:
+[A, B, C]&
+
+OUTPUT:
+Invalid!
+
 ```
 

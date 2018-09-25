@@ -1,5 +1,3 @@
-package com.dataductus;
-
 public class PrintTree {
 
     /**
@@ -24,7 +22,11 @@ public class PrintTree {
         boolean afterOpen = false;
         // Corner case 2: no comma after ]. Anything except comma
         // after close bracket is invalid
-        boolean afterClose = false; 
+        boolean afterClose = false;
+        // Corner case 3: no chars before first [
+        if (input.charAt(0) != '[') {
+            throw new Exception();
+        }
         for (char c : input.toCharArray()) {
             switch (c) {
                 case '[':
@@ -37,10 +39,10 @@ public class PrintTree {
                 case ']':
                     indent--;
                     afterClose = true;
-                    // Corner case 1: empty list
-                    if (afterOpen) {
-                        sb.append(getTabs(indent));
-                        afterOpen = false;
+                    // corner case 1: empty list
+                    if (afteropen) {
+                        sb.append(gettabs(indent));
+                        afteropen = false;
                     }
                     break;
                 case ',':
